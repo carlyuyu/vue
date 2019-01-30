@@ -73,6 +73,15 @@
         // 这个回调将在 `vm.message` 改变后调用
         console.log('新值:'+newValue,'旧值:'+oldValue)
     }) */
+	    let obj_a = {
+        name: 'bytedance',
+        getName() {
+            return this.name
+        }
+    }
+    let fb = obj_a.getName;
+    fb();
+	console.log('ddddddvd');
 </script>
  </body>
 </html>
