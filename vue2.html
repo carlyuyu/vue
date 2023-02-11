@@ -1,0 +1,86 @@
+<!Doctype html>
+ <head>
+  <meta charset="UTF-8">
+  <style type="text/css"> 
+  </style>
+  <script></script>
+    <script src="vue.js"></script>
+ </head>
+ <body>
+ <h2>html5</h2>
+<div id ="dd">
+    <!-- Mustache 语法不能作用在 HTML 特性上，遇到这种情况应该使用 v-bind 指令： -->
+    <p>{{ message}}</p>
+    <p>Computed reversed message: "{{ reverseMessage }}"</p>
+    <span v-once>这个将不会改变: {{ message }}</span>
+<!--     <p>Using mustaches: {{ rawHtml }}</p>
+    <p>Using v-html directive: <span v-html="rawHtml"></span></p> -->
+    <ul>
+        <li style="color:red">麻友</li>
+        <li>由纪</li>
+    </ul>
+    <input v-model="message">
+
+    <button v-on:click="reverseMessage1">反转消息</button>
+    <button @click="reverseMessage1">反转消息</button>
+    <!-- 模板不应该使用太多逻辑 -->
+    <p>{{ message.split('').reverse().join('')}}</p>
+    <p>{{ now}}</p>
+    <!-- 使用 JavaScript 表达式 -->
+    <a v-bind:href="url" target="_blank">跳转</a>
+    <a :href="url" target="_blank">跳转</a>
+</div>
+<script>
+    var obj = {
+        message: 'hello vue',
+        url: 'www.baidu.com'
+    }
+    // Object.freeze(obj)
+
+    var vm = new Vue({
+        el: '#dd',
+        data: obj,
+        //方法
+        methods: {
+            reverseMessage1: function(){
+                this.message = this.message.split('').reverse().join('')
+            }
+        },
+        //计算属性,计算属性是基于它们的依赖进行缓存的
+        computed: {
+            reverseMessage: function(){
+                return this.message.split('').reverse().join('')
+            },
+            now: function(){
+                return Date.now()
+            }
+        },
+        watch: {
+            url: function(val){
+                this.url = val
+            }
+        },
+        //实例生命周期钩子,created 钩子可以用来在一个实例被创建之后执行代码
+        created: function(){
+            // `this` 指向 vm 实例
+            console.log('message is: ' + this.message)
+        }
+    })
+    console.log(vm.$data ===obj)  //true
+    console.log(vm.$el ===document.getElementById('dd'))//true
+    // $watch 是一个实例方法
+    /* vm.$watch('message',function(newValue,oldValue){
+        // 这个回调将在 `vm.message` 改变后调用
+        console.log('新值:'+newValue,'旧值:'+oldValue)
+    }) */
+	    let obj_a = {
+        name: 'bytedance',
+        getName() {
+            return this.name
+        }
+    }
+    let fb = obj_a.getName;
+    fb();
+</script>
+ </body>
+</html>
