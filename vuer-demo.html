@@ -1,0 +1,45 @@
+<!Doctype html>
+
+<head>
+    <meta charset="UTF-8">
+    <style type="text/css">
+    </style>
+    <script></script>
+    <script src="vue.js"></script>
+</head>
+
+<body>
+    <h2>html5</h2>
+    <div id="dd">
+        <p v-text='message'></p>
+        <input v-model="message">
+        <p v-on:click="reverseMessage">反转字符</p>
+        <span v-bind:style="title">绑定</span>
+        <br>
+        <p v-if="seen">显示隐藏</p>
+        <ul>
+            <li v-for="fruit in fruits">
+                {{fruit}}
+            </li>
+        </ul>
+    </div>
+    <script>
+        var vue = new Vue({
+            el: '#dd',
+            data: {
+                message: '你好，世界',
+                title: 'color:red',
+                seen: true,
+                fruits: ['苹果', '香蕉', '西瓜', '橘子', '梨子']
+            },
+            methods: {
+                // reverseMessage: () => this.message = this.message.split('').reverse().join('')
+                reverseMessage: function() {
+                    this.message = this.message.split('').reverse().join('')
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
